@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="defaultCustomerFeedbackReviewDao" alias="customerFeedbackReviewDao"/>
+    <bean name="defaultCustomerFeedbackReviewDao" class="de.cyberporttest.core.daos.impl.DefaultCustomerFeedbackReviewDAO">
+        <constructor-arg value="CustomerFeedbackReview"/>
+        <property name="paginatedFlexibleSearchService" ref="paginatedFlexibleSearchService"/>
+    </bean>
+
+    <alias name="defaultCustomerPurchaseVerifierDAO" alias="customerPurchaseVerifierDAO"/>
+    <bean name="defaultCustomerPurchaseVerifierDAO" class="de.cyberporttest.core.daos.impl.DefaultCustomerPurchaseVerifierDAO"/>
+
+    <alias name="defaultCustomerFeedbackReviewService" alias="customerFeedbackReviewService"/>
+    <bean id="defaultCustomerFeedbackReviewService" class="de.cyberporttest.core.services.impl.DefaultCustomerFeedbackReviewService"/>
+
+    <bean id="customerFeedbackReviewInterceptor" class="de.cyberporttest.core.interceptors.CustomerFeedbackReviewInterceptor"/>
+
+    <bean id="customerFeedbackReviewInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="customerFeedbackReviewInterceptor"/>
+        <property name="typeCode" value="CustomerFeedbackReview"/>
+    </bean>
+			
+</beans>

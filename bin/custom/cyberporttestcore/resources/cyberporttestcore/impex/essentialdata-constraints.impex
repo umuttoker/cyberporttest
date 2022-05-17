@@ -1,0 +1,5 @@
+INSERT_UPDATE MinConstraint; id[unique = true]                  ; severity(code, itemtype(code)); active; annotation                       ; descriptor(enclosingType(code), qualifier); value; message[lang = en]
+                           ; CustomerReviewMustNotBeLessThanOne ; ERROR:Severity                ; true  ; javax.validation.constraints.Min ; CustomerFeedbackReview:rate               ; 1    ; "Review rate must not be less than 1"
+
+INSERT_UPDATE MaxConstraint; id[unique = true]                      ; severity(code, itemtype(code)); active; annotation                       ; descriptor(enclosingType(code), qualifier); value; message[lang = en];
+                           ; CustomerReviewMustNotBeGreaterThanFive ; ERROR:Severity                ; true  ; javax.validation.constraints.Max ; CustomerFeedbackReview:rate               ; 5    ; "Review rate must not be greater than 5"

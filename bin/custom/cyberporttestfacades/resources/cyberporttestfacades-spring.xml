@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultCustomerFeedbackReviewPopulator" alias="customerFeedbackReviewPopulator"/>
+	<bean id="defaultCustomerFeedbackReviewPopulator" class="de.cyberporttest.facades.populators.CustomerFeedbackReviewDataPopulator"/>
+
+	<alias name="defaultCustomerFeedbackReviewConverter" alias="customerFeedbackReviewConverter"/>
+	<bean id="defaultCustomerFeedbackReviewConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.cyberporttest.facades.customerfeedbackreview.data.CustomerFeedbackReviewData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customerFeedbackReviewPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCustomerFeedbackReviewFacade" alias="customerFeedbackReviewFacade"/>
+	<bean id="defaultCustomerFeedbackReviewFacade" class="de.cyberporttest.facades.customerfeedbackreview.impl.DefaultCustomerFeedbackReviewFacade"/>
+</beans>

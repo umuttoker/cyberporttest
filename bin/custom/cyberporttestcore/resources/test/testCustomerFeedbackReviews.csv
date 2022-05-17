@@ -1,0 +1,7 @@
+$catalogVersion = catalogVersion(catalog(id[default='testCatalog']), version[default='Online'])[unique=true, default='testCatalog:Online']
+
+INSERT_UPDATE CustomerFeedbackReview; customer(uid)[unique = true]; product(code, $catalogVersion)[unique = true]; reviewTitle; rate; review
+                                    ; ariel         ; testProduct0                                ; First Review     ; 2   ; Sample review for rate 2
+                                    ; ariel         ; testProduct1                                ; Second Review     ; 4   ; Example review by ariel
+                                    ; ariel         ; testProduct2                                ; Worst Review     ; 1   ; First review of testProduct2
+                                    ; demo          ; testProduct0                                ; Best Review     ; 5   ; Demo user's first review

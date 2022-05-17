@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<config xmlns="http://www.hybris.com/cockpit/config" xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+
+	<!-- cyberporttestbackoffice UI configuration should be provided here -->
+
+	<!--<context component="component-code" module="cyberporttestbackoffice">-->
+		<!--Please check documentation for code snippets for specific components-->
+	<!--</context>-->
+
+	<context component="explorer-tree" merge-by="module">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="CyberPort">
+				<explorer-tree:type-node code="CustomerFeedbackReview" id="CustomerFeedbackReview"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+
+
+	<context type="CustomerFeedbackReview">
+		<context merge-by="type" parent="GenericItem" component="base">
+			<y:base>
+				<y:labels>
+					<y:label>product.name + ' -> ' + reviewTitle</y:label>
+				</y:labels>
+			</y:base>
+		</context>
+
+		<context merge-by="type" parent="GenericItem" component="listview">
+			<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+								 refresh-after-object-creation="true">
+				<list-view:column qualifier="product" />
+				<list-view:column qualifier="customer" />
+				<list-view:column qualifier="reviewTitle" />
+				<list-view:column qualifier="rate" />
+				<list-view:column qualifier="language" />
+			</list-view:list-view>
+		</context>
+
+		<context merge-by="type" parent="GenericItem" component="advanced-search">
+			<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+				<advanced-search:field-list>
+					<advanced-search:field name="product" selected="true" />
+					<advanced-search:field name="verifiedPurchase" selected="true" />
+					<advanced-search:field name="language" selected="true" />
+					<advanced-search:field name="customer" selected="false" />
+					<advanced-search:field name="rate" selected="false" />
+					<advanced-search:field name="review" selected="false" />
+					<advanced-search:field name="reviewTitle" selected="false" />
+				</advanced-search:field-list>
+			</advanced-search:advanced-search>
+		</context>
+
+		<context merge-by="type" parent="GenericItem" component="editor-area">
+			<editorArea:editorArea  xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+				<editorArea:tab name="hmc.tab.cyberport" >
+					<editorArea:section name="hmc.sec.review">
+						<editorArea:attribute qualifier="review" editor="com.hybris.cockpitng.editor.wysiwyg"/>
+						<editorArea:attribute qualifier="reviewTitle"/>
+						<editorArea:attribute qualifier="rate"/>
+						<editorArea:attribute qualifier="verifiedPurchase"/>
+						<editorArea:attribute qualifier="language"/>
+					</editorArea:section>
+					<editorArea:section name="hmc.sec.relation">
+						<editorArea:attribute qualifier="customer"/>
+						<editorArea:attribute qualifier="product"/>
+					</editorArea:section>
+				</editorArea:tab>
+			</editorArea:editorArea>
+		</context>
+
+		<context parent="auto" component="listviewactions" merge-by="type">
+			<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:action action-id="com.hybris.cockpitng.action.create" property="pageable.typeCode"/>
+					<y:action action-id="com.hybris.cockpitng.action.delete" property="selectedObjects"/>
+				</y:group>
+			</y:actions>
+		</context>
+
+		<context component="editorareaactions" merge-by="type" parent="auto">
+			<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject" />
+				</y:group>
+			</y:actions>
+		</context>
+
+		<context component="collectioneditorareaactions" merge-by="type" parent="auto">
+			<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject" />
+				</y:group>
+			</y:actions>
+		</context>
+
+		<context component="create-wizard">
+			<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="customer-feedback-review-create-wizard"
+					 title="create.title(ctx.TYPE_CODE)">
+				<wz:prepare id="prepare">
+					<wz:initialize property="newItem" type="ctx.TYPE_CODE" />
+				</wz:prepare>
+				<wz:step id="step1" label="create.customerfeedbackreview.essential.label" sublabel="create.assearchprofileactivationset.essential.sublabel">
+					<wz:content id="step1.content">
+						<wz:property-list root="newItem">
+							<wz:property qualifier="rate" />
+							<wz:property qualifier="reviewTitle"/>
+							<wz:property qualifier="review" />
+							<wz:property qualifier="language" />
+							<wz:property qualifier="product" />
+							<wz:property qualifier="customer" />
+						</wz:property-list>
+					</wz:content>
+					<wz:navigation id="step1.navigation">
+						<wz:cancel />
+						<wz:done visible="newItem.rate != null AND newItem.reviewTitle != null AND newItem.product != null AND newItem.customer != null">
+							<wz:save property="newItem" />
+						</wz:done>
+					</wz:navigation>
+				</wz:step>
+			</wz:flow>
+		</context>
+	</context>
+</config>
