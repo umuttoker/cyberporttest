@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+
+		<relation code="Customer2FeedbackReview" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="customer" type="Customer" cardinality="one">
+				<description>Review owner</description>
+				<modifiers optional="false"  />
+			</sourceElement>
+			<targetElement qualifier="feedbackReviews" type="CustomerFeedbackReview" cardinality="many" collectiontype="set">
+				<description>Customer Feedback Reviews</description>
+				<modifiers partof="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="Product2CustomerFeedbackReview" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="product" type="Product" cardinality="one">
+				<description>Product</description>
+				<modifiers optional="false"  />
+			</sourceElement>
+			<targetElement qualifier="customerFeedbackReviews" type="CustomerFeedbackReview" cardinality="many" collectiontype="set">
+				<description>Customer Feedback Reviews</description>
+				<modifiers partof="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+
+		<itemtype generate="true"
+		   code="CustomerFeedbackReview"
+		   autocreate="true"
+	   >
+			<description>Customer Feedback Review</description>
+			<deployment table="CustomerFeedbackReview" typecode="14001"/>
+			<attributes>
+
+				<attribute qualifier="reviewTitle" type="java.lang.String">
+					<defaultvalue></defaultvalue>
+					<description>Title of Review</description>
+					<modifiers optional="false"/>
+					<persistence type="property"/>
+				</attribute>
+
+				<attribute qualifier="review" type="java.lang.String">
+					<description>Review</description>
+					<modifiers optional="true"/>
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>CLOB</value>
+						</columntype>
+						<columntype database="sap">
+							<value>NCLOB</value>
+						</columntype>
+						<columntype database="mysql">
+							<value>MEDIUMTEXT</value>
+						</columntype>
+						<columntype database="sqlserver">
+							<value>TEXT</value>
+						</columntype>
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+
+				<attribute qualifier="rate" type="java.lang.Integer">
+					<defaultvalue></defaultvalue>
+					<description>Rate of review</description>
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="verifiedPurchase" type="java.lang.Boolean">
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>If customer purchased the item</description>
+					<persistence type="property"/>
+					<modifiers optional="false" initial="true"/>
+				</attribute>
+
+				<attribute qualifier="language" type="Language">
+					<description>Review language</description>
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+
+				<!-- TODO: add vote relation to it, detirmine if review is helpfull or not.
+					add Media relation to it, allow customer to show their products in actual place -->
+
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

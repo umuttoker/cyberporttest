@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean parent="fieldSetLevelMapping" id="customerFeedbackReviewWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.cyberporttest.occaddon.customerfeedbackreview.dto.CustomerFeedbackReviewWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="reviewTitle,review,rate,verifiedPurchase"/>
+                <entry key="DEFAULT"
+                       value="BASIC,language(DEFAULT),customer(DEFAULT),product(DEFAULT)"/>
+                <entry key="FULL"
+                       value="BASIC,language(FULL),customer(FULL),product(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="customerFeedbackReviewSearchPageWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.cyberporttest.occaddon.customerfeedbackreview.dto.CustomerFeedbackReviewSearchPageWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="results(BASIC)"/>
+                <entry key="DEFAULT"
+                       value="results(DEFAULT),sorts(DEFAULT),pagination(DEFAULT)"/>
+                <entry key="FULL"
+                       value="results(FULL),sorts(FULL),pagination(FULL)"/>
+            </map>
+        </property>
+    </bean>
+</beans>

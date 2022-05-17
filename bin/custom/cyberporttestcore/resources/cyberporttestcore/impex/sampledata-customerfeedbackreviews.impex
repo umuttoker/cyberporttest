@@ -1,0 +1,15 @@
+#Require appreal sample data!!
+
+$productCatalog = apparelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+
+INSERT_UPDATE Customer; uid[unique = true]; customerID  ; name              ; description                  ; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password
+                      ; ppetersonson      ; K2006-C0001 ; Peter Petersonson ; a good customer from denmark ; en                      ; USD                     ; customergroup ; 1234
+                      ; ariel             ; K2006-C0016 ; Ariel F. L�di     ;                              ; en                      ; USD                     ; customergroup ; 1234
+
+INSERT_UPDATE CustomerFeedbackReview; customer(uid)[unique = true]; product(code, $catalogVersion)[unique = true]; review                ; reviewTitle                ; rate;
+                                    ; ppetersonson                ; 103410_snapper                               ; it is not a blue      ; clearly it is not blue     ; 3
+                                    ; ppetersonson                ; 100191_lime                                  ; 100191_lime review    ; 100191_lime reviewTile     ; 4
+                                    ; ppetersonson                ; 94474_blackout                               ; 94474_blackout review ; 94474_blackout reviewTitle ; 5
+                                    ; ppetersonson                ; 95385_cardinal                               ; 95385_cardinal review ; 95385_cardinal reviewTitle ; 2
+                                    ; ariel                       ; 96977_white                                  ; Ariel's only review   ; Arial's reviewTitle        ; 1
