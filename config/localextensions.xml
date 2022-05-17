@@ -22,6 +22,7 @@
     <extension name='orderselfserviceaddon' />
     <extension name='rulebuilderbackoffice' />
     <extension name='couponbackoffice' />
+    <extension name='couponbackoffice' />
     <extension name='droolsruleengineservices' />
     <extension name='couponfacades' />
     <extension name='couponservices' />
@@ -95,5 +96,13 @@
     <extension name='merchandisingservices' />
     <extension name='merchandisingservicesbackoffice' />
     <extension name='merchandisingstorefrontsampledataaddon' />
+    <extension name='addonsupport' />
+    <extension name='yoccaddon' />
+    <extension name='ybackoffice' />
+
+    <extension name="cyberporttestcore" />
+    <extension name="cyberporttestfacades" />
+    <extension name="cyberporttestoccaddon" />
+    <extension name="cyberporttestbackoffice" />
   </extensions>
 </hybrisconfig>
